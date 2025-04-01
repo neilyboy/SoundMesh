@@ -1,0 +1,29 @@
+# Use an official Node runtime as a parent image
+# Choose a version compatible with your project (e.g., LTS)
+FROM node:18-alpine
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json (or bun.lockb if using bun)
+COPY package.json package-lock.json* ./
+# If using bun, uncomment the line below and comment out the npm install line
+# COPY bun.lockb .
+
+# Install dependencies
+RUN npm install
+# If using bun, uncomment the line below and comment out the npm install line
+# RUN bun install --frozen-lockfile
+
+# Copy the rest of the application code into the container at /app
+# This is done after npm install to leverage Docker cache
+COPY . .
+
+# Make Vite's default port available
+EXPOSE 5173
+
+# Run the Vite dev server
+# Use --host to expose it outside the container
+CMD ["npm", "run", "dev", "--", "--host"] 
+# If using bun, use the command below instead
+# CMD ["bun", "run", "dev", "--", "--hostname", "0.0.0.0"]

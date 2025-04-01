@@ -1,0 +1,117 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    
+    --radius: 0.5rem;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border selection:bg-white/10 selection:text-white;
+  }
+  
+  body {
+    @apply bg-studio-bg text-studio-text antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .glass-card {
+    @apply backdrop-blur-sm bg-black/40 border border-studio-border shadow-lg;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent;
+  }
+  
+  .btn-click {
+    @apply active:scale-95 transition-transform;
+  }
+  
+  .ptt-active {
+    @apply bg-whisper-500 text-white;
+  }
+  
+  .ptt-inactive {
+    @apply bg-studio-card text-studio-text;
+  }
+  
+  .channel-active {
+    @apply ring-2 ring-whisper-500 ring-offset-1 ring-offset-studio-bg;
+  }
+  
+  .volume-bar {
+    @apply h-1.5 rounded-full bg-studio-border relative overflow-hidden;
+  }
+  
+  .volume-level {
+    @apply absolute h-full bg-whisper-500 left-0 top-0;
+  }
+  
+  .peak-level {
+    @apply absolute h-full bg-green-500 left-0 top-0 transition-all duration-100;
+  }
+  
+  .peak-level.warning {
+    @apply bg-yellow-500;
+  }
+  
+  .peak-level.danger {
+    @apply bg-red-500;
+  }
+}

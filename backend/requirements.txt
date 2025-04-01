@@ -1,0 +1,7 @@
+fastapi>=0.100.0
+uvicorn[standard]>=0.20.0
+websockets>=11.0
+aiortc>=1.5.0
+# pydantic>=2.0 # FastAPI includes Pydantic
+# python-dotenv>=1.0.0 # For loading .env files
+# Add GStreamer/FFmpeg bindings if needed (e.g., PyGObject, ffmpeg-python)

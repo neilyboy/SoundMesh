@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@tanstack/react-query": "^5.71.0",
+    "react-router-dom": "^7.4.1"
+  }
+}

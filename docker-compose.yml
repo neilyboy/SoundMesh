@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: soundmesh-backend
+    ports:
+      - "8000:8000" # API/WebSocket port
+      - "40000-40050:40000-40050/udp" # WebRTC ICE ports
+    volumes:
+      - ./backend/app:/app/app # Mount app code for live reload (if uvicorn uses --reload)
+    # environment:
+      # - DATABASE_URL=postgresql://user:password@db:5432/soundmeshdb
+      # Add other necessary environment variables
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload # Use reload for dev
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev # Assuming a Dockerfile.dev exists for development
+    container_name: soundmesh-frontend
+    ports:
+      - "5173:5173" # Default Vite dev port
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules # Avoids overwriting node_modules from host
+    environment:
+      - VITE_BACKEND_URL=http://localhost:8000 # Pass backend URL to frontend
+    # Depends on backend if frontend needs API during build or startup
+    # depends_on:
+    #   - backend
+
+# Optional: Add database service
+#  db:
+#    image: postgres:15
+#    container_name: soundmesh-db
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data/
+#    environment:
+#      - POSTGRES_DB=soundmeshdb
+#      - POSTGRES_USER=user
+#      - POSTGRES_PASSWORD=password
+#    ports:
+#      - "5432:5432"
+
+# volumes:
+#   postgres_data:
